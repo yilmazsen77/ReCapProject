@@ -11,16 +11,19 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CarTest();
-
             //ColorTest();
-
             //BrandTest();
-
+            //UserTest();
+            //CustomerTest();
+            //RentalTest();
             //CarCrudTest();
-
             //ColorCrudTest();
-
             //BrandCrudTest();
+            //UserCrudTest();
+            //CustomerCrudTest();
+            //RentalCrudTest();
+
+
 
         }
 
@@ -40,7 +43,7 @@ namespace ConsoleUI
 
             foreach (var car in carManager.GetCarDetails().Data)
             {
-                Console.WriteLine(car.Description+" / "+car.ColorName+" / " + car.BrandName);
+                Console.WriteLine(car.Description + " / " + car.ColorName + " / " + car.BrandName);
             }
         }
 
@@ -54,6 +57,44 @@ namespace ConsoleUI
             }
         }
 
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName);
+            }
+
+            Console.WriteLine(userManager.GetById(1).Data.FirstName);
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+            foreach (var customer in customerManager.GetAll().Data)
+            {
+                Console.WriteLine(customer.CompanyName);
+            }
+
+            Console.WriteLine(customerManager.GetById(1).Data.CompanyName);
+        }
+
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.RentalDate);
+            }
+
+            Console.WriteLine(rentalManager.GetById(1).Data.RentalDate);
+        }
+
+
+
         private static void BrandCrudTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
@@ -62,20 +103,20 @@ namespace ConsoleUI
             {
                 Name = "Şahin"
             });
-            Console.WriteLine("Brand added.");
+
 
             brandManager.Update(new Brand
             {
                 Id = 1,
                 Name = "Seat"
             });
-            Console.WriteLine("Brand updated");
+
 
             brandManager.Delete(new Brand
             {
                 Id = 2,
             });
-            Console.WriteLine("Brand deleted.");
+
         }
 
         private static void ColorCrudTest()
@@ -87,7 +128,7 @@ namespace ConsoleUI
                 Name = "Matalik gri"
             });
 
-            Console.WriteLine("Color added.");
+
 
             colorManager.Update(new Color
             {
@@ -95,14 +136,14 @@ namespace ConsoleUI
                 Name = "Sarı"
             });
 
-            Console.WriteLine("Color updated.");
+
 
             colorManager.Delete(new Color
             {
                 Id = 1,
             });
 
-            Console.WriteLine("Color deleted.");
+
         }
 
         private static void CarCrudTest()
@@ -118,7 +159,7 @@ namespace ConsoleUI
                 ModelYear = 2021
             });
 
-            Console.WriteLine("New car added.");
+
 
             carManager.Update(new Car
             {
@@ -130,14 +171,98 @@ namespace ConsoleUI
                 ModelYear = 2021
             });
 
-            Console.WriteLine("Car updated.");
+
 
             carManager.Delete(new Car
             {
                 Id = 1
             });
 
-            Console.WriteLine("Car deleted.");
+
+
+        }
+
+        private static void CustomerCrudTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+            customerManager.Add(new Customer
+            {
+                CompanyName = "abc"
+            });
+
+
+            customerManager.Update(new Customer
+            {
+                Id = 1,
+                CompanyName = "Seat"
+            });
+
+
+            customerManager.Delete(new Customer
+            {
+                Id = 1,
+            });
+
+        }
+
+        private static void UserCrudTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            userManager.Add(new User
+            {
+                FirstName = "abc",
+                LastName = "abc",
+                Email = "mail@abc.com",
+                Password = "12344"
+            });
+
+
+            userManager.Update(new User
+            {
+                Id = 1,
+                FirstName = "abc",
+                LastName = "abc",
+                Email = "mail@abc.com",
+                Password = "12344"
+            });
+
+
+            userManager.Delete(new User
+            {
+                Id = 1,
+            });
+
+        }
+
+        private static void RentalCrudTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            rentalManager.Add(new Rental
+            {
+                CarId = 1,
+                CustomerId = 1,
+                RentalDate = Convert.ToDateTime(6 / 7 / 2020),
+                ReturnDate = Convert.ToDateTime(6 / 7 / 2020)
+            });
+
+
+            rentalManager.Update(new Rental
+            {
+                Id = 1,
+                CarId = 1,
+                CustomerId = 1,
+                RentalDate = Convert.ToDateTime(6 / 7 / 2020),
+                ReturnDate = Convert.ToDateTime(6 / 7 / 2020)
+            });
+
+
+            rentalManager.Delete(new Rental
+            {
+                Id = 1,
+            });
 
         }
     }

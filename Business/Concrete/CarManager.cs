@@ -21,14 +21,14 @@ namespace Business.Concrete
         {
             if (car.Description.Length <=2 )
             {
-                return new ErrorResult(Messages.CarNameInvalid);
+                return new ErrorResult(Messages.NameInvalid);
             }
             else if (car.DailyPrice <= 0)
             {
                 return new ErrorResult("Daily price must be bigger than 0.");
             }
             else _carDal.Add(car);
-            return new SuccessResult(Messages.CarAdded);
+            return new SuccessResult(Messages.Added);
 
         }
         public IResult Delete(Car car)
@@ -45,7 +45,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.Listed);
         }
 
         public IDataResult<Car> GetById(int id)
