@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,12 +18,9 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
-        {
-            if (brand.Name.Length<=2)
-            {
-                Console.WriteLine("Name must be longer than 2 characters.");
-            }
+        {        
             _brandDal.Add(brand);
             return new SuccessResult();
         }
