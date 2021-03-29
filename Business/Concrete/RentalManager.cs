@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -24,16 +25,13 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var result = CheckReturnDate(rental.CarId);
-
-            if (!result.Success)
+            IResult result = BusinessRules.Run(CheckReturnDate(rental.CarId)); //yeni kurallar virgül ile eklenebilir.
+            if (result!=null)
             {
-                return new ErrorResult(result.Message);
+                return result;
             }
-
             _rentalDal.Add(rental);
-            return new SuccessResult(Messages.Added);
-            
+            return new SuccessResult(Messages.Added);            
         }
 
         public IResult Delete(Rental rental)

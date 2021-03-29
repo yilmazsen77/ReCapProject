@@ -14,6 +14,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p=>p.FirstName).NotEmpty();
             RuleFor(p => p.FirstName).Length(10).When(p=>p.LastName.Length == 10);
             RuleFor(p => p.FirstName).Must(StartWithA).WithMessage("This must starts with the letter 'A'");
+            
 
         }
 
