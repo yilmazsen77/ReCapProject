@@ -57,17 +57,7 @@ namespace ConsoleUI
             }
         }
 
-        private static void UserTest()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine(user.FirstName);
-            }
-
-            Console.WriteLine(userManager.GetById(1).Data.FirstName);
-        }
+        
 
         private static void CustomerTest()
         {
@@ -206,35 +196,35 @@ namespace ConsoleUI
 
         }
 
-        private static void UserCrudTest()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
+        //private static void UserCrudTest()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
 
-            userManager.Add(new User
-            {
-                FirstName = "abc",
-                LastName = "abc",
-                Email = "mail@abc.com",
-                Password = "12344"
-            });
-
-
-            userManager.Update(new User
-            {
-                Id = 1,
-                FirstName = "abc",
-                LastName = "abc",
-                Email = "mail@abc.com",
-                Password = "12344"
-            });
+        //    userManager.Add(new User
+        //    {
+        //        FirstName = "abc",
+        //        LastName = "abc",
+        //        Email = "mail@abc.com",
+        //        Password = "12344"
+        //    });
 
 
-            userManager.Delete(new User
-            {
-                Id = 1,
-            });
+        //    userManager.Update(new User
+        //    {
+        //        Id = 1,
+        //        FirstName = "abc",
+        //        LastName = "abc",
+        //        Email = "mail@abc.com",
+        //        Password = "12344"
+        //    });
 
-        }
+
+        //    userManager.Delete(new User
+        //    {
+        //        Id = 1,
+        //    });
+
+        //}
 
         private static void RentalCrudTest()
         {
